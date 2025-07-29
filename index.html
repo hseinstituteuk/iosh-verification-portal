@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Verify an IOSH certificate</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Custom purple colors matching IOSH theme */
+  .bg-iosh-purple { background-color: #3c1874; }
+  .bg-iosh-purple-light { background-color: #7b6fb5; }
+  .text-iosh-purple { color: #3c1874; }
+  .btn-iosh-purple {
+    background-color: #3c1874;
+    color: white;
+    font-weight: 600;
+  }
+  .btn-iosh-purple:hover {
+    background-color: #2a0f54;
+  }
+  .btn-iosh-teal {
+    background-color: #005662;
+    color: white;
+    font-weight: 600;
+  }
+  .btn-iosh-teal:hover {
+    background-color: #003d40;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Hover icon effect for footer social icons */
+  .social-icon:hover {
+    color: #00bcd4;
+  }
+  
+  /* Ellipsis for nav breadcrumb */
+  .breadcrumb {
+    font-size: 0.75rem;
+    color: #ddd;
+  }
+  /* Input error highlight */
+  input:invalid {
+    border-color: #dc2626;
+  }
+
+  /* Simple table striping */
+  table tr:nth-child(even) {
+    background-color: #f3f4f6;
+  }
+</style>
+</head>
+<body class="bg-white text-gray-800 font-sans leading-relaxed">
+
+<!-- Header nav with logo and links -->
+<header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+  <div class="container mx-auto flex items-center justify-between py-3 px-4 md:px-8">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2">
+      <img src="logo.png" alt="IOSH logo circle in purple and blue colors" class="w-10 h-10 rounded-full object-contain"/>
+      <span class="font-semibold text-base md:text-lg text-iosh-purple">IOSH</span>
+    </a>
+    <!-- Nav Links -->
+    <nav class="hidden md:flex space-x-8 text-sm text-gray-700">
+      <a href="#" class="hover:text-iosh-purple font-medium">Qualifications and courses</a>
+      <a href="#" class="hover:text-iosh-purple font-medium border-b-2 border-iosh-purple pb-1">Guidance and resources</a>
+      <a href="#" class="hover:text-iosh-purple font-medium">Get involved</a>
+      <a href="#" class="hover:text-iosh-purple font-medium">About</a>
+    </nav>
+    <!-- Right side user & member -->
+    <div class="hidden md:flex items-center space-x-4">
+      <button aria-label="Search" class="rounded-full bg-[#005461] p-2 text-white hover:bg-[#003f3e] transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button aria-label="User account" class="rounded-full bg-[#005461] p-2 text-white hover:bg-[#003f3e] transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0113 0"/></svg>
+      </button>
+      <button class="bg-iosh-purple px-4 py-2 rounded text-white text-sm font-semibold hover:bg-[#2a0f54] transition">Become a member</button>
+    </div>
+  </div>
+</header>
+
+<!-- Page top banner -->
+<section class="bg-iosh-purple text-white py-6 px-6 md:px-12">
+  <small class="text-xs text-gray-300 mb-1 block">Home &rsaquo; Guidance and resources &rsaquo; Business</small>
+  <h1 class="text-2xl md:text-3xl font-bold leading-tight max-w-3xl mb-1">Verify an IOSH certificate</h1>
+  <p class="max-w-3xl">Check your new employee’s credentials</p>
+</section>
+
+<!-- Main content chooser -->
+<section class="max-w-5xl mx-auto py-12 px-6 text-center">
+  <h2 class="text-2xl font-bold text-gray-800 mb-2">Choose type of IOSH certificate to verify</h2>
+  <p class="text-sm text-gray-600 mb-8">Do an instant online check to verify IOSH membership grade, training course or qualification certificates.</p>
+  <div class="flex flex-col md:flex-row justify-center gap-10 max-w-3xl mx-auto">
+    <a href="#membership" class="btn-iosh-purple px-5 py-2 rounded font-semibold inline-block">Membership certificate</a>
+    <a href="#training" class="btn-iosh-purple px-5 py-2 rounded font-semibold inline-block">Training certificate</a>
+    <a href="#qualification" class="btn-iosh-purple px-5 py-2 rounded font-semibold inline-block">Qualification certificate</a>
+  </div>
+</section>
+
+<!-- Certificate verification forms and data sections -->
+<section id="membership" class="max-w-4xl mx-auto px-6 py-12 border-t border-gray-300">
+  <h3 class="text-iosh-purple font-bold text-xl mb-4">Membership certificate verifier</h3>
+  <p class="text-sm mb-6 border border-gray-300 p-3 bg-gray-50 rounded">You will need the certificate number, first name and surname. Enter the information and then hit 'Verify certificate' for an instant result.</p>
+  
+  <form id="form-membership" class="space-y-4 max-w-md" onsubmit="verifyMembership(event)">
+    <label class="block text-xs font-semibold text-gray-600" for="membershipNumber">Membership number *</label>
+    <input required id="membershipNumber" name="membershipNumber" type="text" placeholder="e.g. 012345" class="w-full border border-gray-300 rounded p-2 text-sm" />
+    
+    <label class="block text-xs font-semibold text-gray-600" for="firstNameM">First name *</label>
+    <input required id="firstNameM" name="firstName" type="text" placeholder="As on certificate" class="w-full border border-gray-300 rounded p-2 text-sm"/>
+    
+    <label class="block text-xs font-semibold text-gray-600" for="surnameM">Surname *</label>
+    <input required id="surnameM" name="surname" type="text" placeholder="As on certificate" class="w-full border border-gray-300 rounded p-2 text-sm"/>
+    
+    <button type="submit" class="btn-iosh-purple px-5 py-2 rounded text-sm">Verify certificate</button>
+  </form>
+  
+  <div id="membershipResult" class="mt-6 text-center"></div>
+
+  <div class="mt-8 border-t pt-6 flex flex-wrap gap-4 max-w-md mx-auto text-xs text iosh-purple text-gray-700">
+    <a href="#training" class="btn-iosh-teal px-3 py-1 rounded inline-block flex-1">Training course certificate ></a>
+    <a href="#qualification" class="btn-iosh-teal px-3 py-1 rounded inline-block flex-1">Qualification certificate ></a>
+  </div>
+</section>
+
+<section id="training" class="max-w-4xl mx-auto px-6 py-12 border-t border-gray-300 hidden">
+  <h3 class="text-iosh-purple font-bold text-xl mb-4">Training certificate verifier</h3>
+  <p class="text-sm mb-6 border border-gray-300 p-3 bg-gray-50 rounded">You will need the certificate number, first name and surname. Date of birth is optional. Enter the information and then hit 'Verify certificate' for an instant result.</p>
+  
+  <form id="form-training" class="space-y-4 max-w-md" onsubmit="verifyTraining(event)">
+    <label class="block text-xs font-semibold text-gray-600" for="searchOption">Search Option *</label>
+    <select id="searchOption" name="searchOption" class="w-full border border-gray-300 rounded p-2 text-sm" required>
+      <option value="withoutDOB">Search without DOB</option>
+      <option value="withDOB">Search with DOB</option>
+    </select>
+    
+    <label class="block text-xs font-semibold text-gray-600" for="certificateNumber">Certificate number *</label>
+    <input required id="certificateNumber" name="certificateNumber" type="text" placeholder="Certificate number" class="w-full border border-gray-300 rounded p-2 text-sm" />
+    
+    <label class="block text-xs font-semibold text-gray-600" for="firstNameT">First name *</label>
+    <input required id="firstNameT" name="firstName" type="text" placeholder="As on certificate" class="w-full border border-gray-300 rounded p-2 text-sm" />
+    
+    <label class="block text-xs font-semibold text-gray-600" for="surnameT">Surname *</label>
+    <input required id="surnameT" name="surname" type="text" placeholder="As on certificate" class="w-full border border-gray-300 rounded p-2 text-sm" />
+    
+    <button type="submit" class="btn-iosh-purple px-5 py-2 rounded text-sm">Verify certificate</button>
+  </form>
+
+  <div id="trainingResult" class="mt-6 text-center"></div>
+
+  <div class="mt-8 border-t pt-6 flex flex-wrap gap-4 max-w-md mx-auto text-xs text iosh-purple text-gray-700">
+    <a href="#membership" class="btn-iosh-teal px-3 py-1 rounded inline-block flex-1">Membership certificate ></a>
+    <a href="#qualification" class="btn-iosh-teal px-3 py-1 rounded inline-block flex-1">Qualification certificate ></a>
+  </div>
+</section>
+
+<section id="qualification" class="max-w-4xl mx-auto px-6 py-12 border-t border-gray-300 hidden">
+  <h3 class="text-iosh-purple font-bold text-xl mb-4">Qualification certificate verifier</h3>
+  <p class="text-sm mb-6 border border-gray-300 p-3 bg-gray-50 rounded">Check IOSH Certificate and IOSH Diploma qualifications. Use first name, surname, qualification, and certificate number for verification.</p>
+  
+  <form id="form-qualification" class="space-y-4 max-w-md" onsubmit="verifyQualification(event)">
+    <label class="block text-xs font-semibold text-gray-600" for="qualCertificateNumber">Certificate number *</label>
+    <input required id="qualCertificateNumber" name="qualCertificateNumber" type="text" placeholder="Certificate number" class="w-full border border-gray-300 rounded p-2 text-sm" />
+    
+    <label class="block text-xs font-semibold text-gray-600" for="firstNameQ">First name *</label>
+    <input required id="firstNameQ" name="firstName" type="text" placeholder="As on certificate" class="w-full border border-gray-300 rounded p-2 text-sm" />
+    
+    <label class="block text-xs font-semibold text-gray-600" for="surnameQ">Surname *</label>
+    <input required id="surnameQ" name="surname" type="text" placeholder="As on certificate" class="w-full border border-gray-300 rounded p-2 text-sm" />
+    
+    <label class="block text-xs font-semibold text-gray-600" for="qualificationType">Qualification type *</label>
+    <select required id="qualificationType" name="qualificationType" class="w-full border border-gray-300 rounded p-2 text-sm">
+      <option value="">Select qualification</option>
+      <option value="iosh-certificate">IOSH Certificate</option>
+      <option value="iosh-diploma">IOSH Diploma</option>
+    </select>
+    
+    <button type="submit" class="btn-iosh-purple px-5 py-2 rounded text-sm">Verify certificate</button>
+  </form>
+
+  <div id="qualificationResult" class="mt-6 text-center"></div>
+
+  <div class="mt-8 border-t pt-6 flex flex-wrap gap-4 max-w-md mx-auto text-xs text iosh-purple text-gray-700">
+    <a href="#membership" class="btn-iosh-teal px-3 py-1 rounded inline-block flex-1">Membership certificate ></a>
+    <a href="#training" class="btn-iosh-teal px-3 py-1 rounded inline-block flex-1">Training certificate ></a>
+  </div>
+</section>
+
+<!-- Sample certificate data to verify -->
+<script>
+const membershipData = [
+  { membershipNumber: "000123", firstName: "Alice", surname: "Green", grade: "Graduate Member" },
+  { membershipNumber: "000124", firstName: "Bob", surname: "Smith", grade: "Technical Member" },
+  { membershipNumber: "000125", firstName: "Charlie", surname: "Brown", grade: "Affiliate" }
+];
+
+const trainingData = [
+  { certificateNumber: "TRN202501", firstName: "Diana", surname: "Prince", dob: "1985-03-21", course: "Managing Safely" },
+  { certificateNumber: "TRN202502", firstName: "Evan", surname: "Taylor", dob: "1990-07-12", course: "Working Safely" }
+];
+
+const qualificationData = [
+  { certificateNumber: "QUAL5001", firstName: "Fiona", surname: "White", type: "iosh-certificate", qualification: "IOSH Certificate" },
+  { certificateNumber: "QUAL5002", firstName: "George", surname: "Black", type: "iosh-diploma", qualification: "IOSH Diploma" }
+];
+
+// Utility normalize
+function normalize(s) {
+  return s.trim().toLowerCase();
+}
+
+// Membership verification logic
+function verifyMembership(event) {
+  event.preventDefault();
+  const number = normalize(event.target.membershipNumber.value);
+  const first = normalize(event.target.firstName.value);
+  const last = normalize(event.target.surname.value);
+  
+  const cert = membershipData.find(c => normalize(c.membershipNumber) === number && normalize(c.firstName) === first && normalize(c.surname) === last);
+  const output = document.getElementById("membershipResult");
+  
+  if (cert) {
+    output.innerHTML = `<p class="text-green-700 font-semibold text-lg">Valid membership certificate for <strong>${cert.firstName} ${cert.surname}</strong>: Grade - ${cert.grade}</p>`;
+  } else {
+    output.innerHTML = `<p class="text-red-700 font-semibold text-lg">No matching membership certificate found. Please check your details and try again.</p>`;
+  }
+}
+
+// Training verification logic
+function verifyTraining(event) {
+  event.preventDefault();
+  const number = normalize(event.target.certificateNumber.value);
+  const first = normalize(event.target.firstName.value);
+  const last = normalize(event.target.surname.value);
+  
+  const cert = trainingData.find(c => normalize(c.certificateNumber) === number && normalize(c.firstName) === first && normalize(c.surname) === last);
+  const output = document.getElementById("trainingResult");
+  
+  if (cert) {
+    output.innerHTML = `<p class="text-green-700 font-semibold text-lg">Valid training certificate for <strong>${cert.firstName} ${cert.surname}</strong>: Course - ${cert.course}</p>`;
+  } else {
+    output.innerHTML = `<p class="text-red-700 font-semibold text-lg">No matching training certificate found. Please check your details and try again.</p>`;
+  }
+}
+
+// Qualification verification logic
+function verifyQualification(event) {
+  event.preventDefault();
+  const number = normalize(event.target.qualCertificateNumber.value);
+  const first = normalize(event.target.firstName.value);
+  const last = normalize(event.target.surname.value);
+  const type = event.target.qualificationType.value;
+  
+  const cert = qualificationData.find(c => normalize(c.certificateNumber) === number && normalize(c.firstName) === first && normalize(c.surname) === last && c.type === type);
+  const output = document.getElementById("qualificationResult");
+  
+  if (cert) {
+    output.innerHTML = `<p class="text-green-700 font-semibold text-lg">Valid qualification certificate for <strong>${cert.firstName} ${cert.surname}</strong>: Qualification - ${cert.qualification}</p>`;
+  } else {
+    output.innerHTML = `<p class="text-red-700 font-semibold text-lg">No matching qualification certificate found. Please check your details and try again.</p>`;
+  }
+}
+
+// Navigation between sections anchors -> show/hide forms
+function showSection(id) {
+  ["membership", "training", "qualification"].forEach((sectionId) => {
+    document.getElementById(sectionId).classList.toggle("hidden", sectionId !== id);
+  });
+}
+
+document.querySelectorAll("a[href^='#']").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const targetId = link.getAttribute("href").substring(1);
+    if (["membership", "training", "qualification"].includes(targetId)) {
+      e.preventDefault();
+      showSection(targetId);
+      // scroll to top of form container
+      document.getElementById(targetId).scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
+</script>
+
+<!-- Footer -->
+<footer class="bg-iosh-purple text-white py-12 px-6 text-xs md:text-sm">
+  <div class="container mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
+    <!-- Logo + social -->
+    <div>
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/637700dd-df5a-4997-a943-b3a7fffa1c89.png" alt="IOSH logo circle in purple and blue colors" class="mb-3 w-14 h-14 object-contain" />
+      <p class="font-semibold mb-1">Follow us</p>
+      <nav class="flex space-x-2 text-sm">
+        <a href="#" aria-label="Facebook" class="social-icon hover:text-blue-600">f</a>
+        <a href="#" aria-label="LinkedIn" class="social-icon hover:text-blue-400">in</a>
+        <a href="#" aria-label="X (Twitter)" class="social-icon hover:text-sky-400">x</a>
+        <a href="#" aria-label="YouTube" class="social-icon hover:text-red-600">yt</a>
+        <a href="#" aria-label="Instagram" class="social-icon hover:text-pink-600">ig</a>
+      </nav>
+    </div>
+
+    <!-- Navigation links -->
+    <div class="space-y-2">
+      <p class="font-semibold">Overview</p>
+      <a href="#" class="block hover:text-iosh-purple-light">Qualifications and courses</a>
+      <a href="#" class="block hover:text-iosh-purple-light">Guidance and resources</a>
+      <a href="#" class="block hover:text-iosh-purple-light">Get involved</a>
+      <a href="#" class="block hover:text-iosh-purple-light">About us</a>
+      <a href="#" class="block hover:text-iosh-purple-light">News and opinion</a>
+      <a href="#" class="block hover:text-iosh-purple-light">Contact us</a>
+      <a href="#" class="block hover:text-iosh-purple-light">IOSH jobs</a>
+      <a href="#" class="block hover:text-iosh-purple-light">IOSH magazine</a>
+      <a href="#" class="block hover:text-iosh-purple-light">Media centre</a>
+    </div>
+
+    <div class="space-y-2">
+      <p class="font-semibold">Policies</p>
+      <a href="#" class="block hover:text-iosh-purple-light">Terms and conditions</a>
+      <a href="#" class="block hover:text-iosh-purple-light">Privacy notice</a>
+      <a href="#" class="block hover:text-iosh-purple-light">Cookie policy</a>
+      <a href="#" class="block hover:text-iosh-purple-light">Accessibility</a>
+      <a href="#" class="block hover:text-iosh-purple-light">Certificate validation</a>
+      <a href="#" class="block hover:text-iosh-purple-light">Sitemap</a>
+    </div>
+
+    <div class="space-y-2">
+      <p class="font-semibold">IOSH Office</p>
+      <p>The Grange<br />Highfield Drive<br />Wigston<br />Leicestershire<br />LE18 1NN<br />UK</p>
+    </div>
+
+    <div class="space-y-2">
+      <p class="font-semibold">Contact</p>
+      <p>Email<br /><a href="mailto:enquiries@iosh.com" class="underline hover:text-iosh-purple-light">enquiries@iosh.com</a></p>
+      <p>Phone number<br /><a href="tel:+441163500700" class="underline hover:text-iosh-purple-light">+44 (0)116 350 0700</a></p>
+      <p>Fax<br /><a href="tel:+441162573101" class="underline hover:text-iosh-purple-light">+44 (0)116 257 3101</a></p>
+    </div>
+  </div>
+  <p class="mt-8 text-xs text-gray-300">© 2025 IOSH. Registered charity in England and Wales No. 1096790 and Scotland No. SC043254. VAT registration number 705 3242 69. IOSH Services Limited company registration number 01816826.</p>
+</footer>
+
+</body>
+</html>
+
