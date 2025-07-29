@@ -4,7 +4,7 @@ A professional and fully responsive certificate verification system built for IO
 
 ## 🌐 Live Demo
 
-🔗 [Visit Live Site](https://yourusername.github.io/iosh-verification-portal/)
+🔗 [Visit Live Site](https://hseinstituteuk.github.io/iosh-verification-portal/)
 
 ---
 
